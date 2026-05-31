@@ -1,0 +1,12 @@
+[Unit]
+Description=Run anonymous system resource monitor every 5 minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5min
+Persistent=true
+Unit=system-resource-monitor.service
+
+[Install]
+WantedBy=timers.target
+

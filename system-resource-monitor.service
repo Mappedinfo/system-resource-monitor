@@ -1,0 +1,14 @@
+[Unit]
+Description=Anonymous System Resource Monitor sample
+Documentation=file:/opt/system-resource-monitor/README.md
+After=multi-user.target
+
+[Service]
+Type=oneshot
+User=root
+UMask=0027
+TimeoutStartSec=30
+NoNewPrivileges=true
+CapabilityBoundingSet=~CAP_KILL
+SystemCallFilter=~kill tgkill tkill pidfd_send_signal rt_sigqueueinfo rt_tgsigqueueinfo
+ExecStart=/usr/bin/python3 /opt/system-resource-monitor/system_resource_monitor.py --db /var/lib/system-resource-monitor/system_metrics.sqlite3 collect --retention-days 90 --max-energy-interval-sec 900
